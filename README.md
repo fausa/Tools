@@ -22,7 +22,7 @@ Many tools are available at a cost, or through API's when they can be easily imp
 These tools are meant to be a place to start, and might help with some basic needs.
 
 ## Usage
-1. webscraper.py
+1. webscrape.py
    * Copy/clone to personal directory
    * Run from prompt window: python webscraper.py
    * Enter precise parent URL address (make sure to use the secure https name if needed)
