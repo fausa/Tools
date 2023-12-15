@@ -35,12 +35,17 @@ driver = webdriver.Firefox()
 
 
 javascript_code = """
-var paragraphs = document.querySelectorAll('p');
-var paragraphText = [];
-for (var i = 0; i < paragraphs.length; i++) {
-  paragraphText.push(paragraphs[i].textContent);
+var allElements = document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,th,tbody');
+var content = [];
+
+// var content = Array.from(allElements).map(el => el.textContent);
+
+for (var i = 0; i < allElements.length; i++) {
+  content.push(allElements[i].textContent);
 }
-return paragraphText;
+
+
+return content;
 """
 
 javascript_code_url5 = """// Define the origin address
@@ -90,7 +95,9 @@ while queue:
         driver.get(current_url)
         time.sleep(2)
         visited_urls.append(current_url)
+        #headers, text, tableheader, tabletext= driver.execute_script(javascript_code)
         data_method = driver.execute_script(javascript_code)
+        #one_stop_dict[current_url]=[[headers, text, tableheader, tabletext]]
         one_stop_dict[current_url]=data_method
         print(f"Scraping {current_url}")
         
