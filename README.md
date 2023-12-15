@@ -24,12 +24,12 @@ These tools are meant to be a place to start, and might help with some basic nee
 ## Usage
 1. webscrape.py
    * Copy/clone to personal directory
-   * Run from prompt window: python webscraper.py
+   * Run from prompt window: python webscrape.py
    * Enter precise parent URL address (make sure to use the secure https name if needed)
-   * Enter output filename
+   * Enter output filename - data will be output as a JSON file
    * Run
   
 ## How do the tools work?
 Please communicate any errors or shortcomings as these tools are by no means complete and final solutions - that way they can be fixed. 
-Thanks in advance :D
+Thanks in advance ✨
 
