@@ -17,9 +17,6 @@ Develop open-source tools to help build upon and use for machine learning/AI pro
 ## Purpose
 A resource for gathered learning around methods to build upon and assist in larger AI projects
 
-## Literature Review
-There
-
 ## Motivation
 Many tools are available at a cost, or through API's when they can be easily implemented by the developer. 
 These tools are meant to be a place to start, and might help with some basic needs.
