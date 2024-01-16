@@ -15,7 +15,7 @@ visited_urls = []
 
 
 # Gets user input
-url = input("What is the website you would like to scrape?")
+url = input("What is the website you would like to scrape? (note: enter without appending / at the end)\n")
 initial_url = [url]
 
 # Format the url string for javascript use:

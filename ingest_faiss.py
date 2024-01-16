@@ -8,8 +8,17 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 import os
 
-DATA_PATH="../jupyter files/data/"
-DB_FAISS_PATH = "vectorstore/db_faiss/"
+print("Please make sure you have a HUGGINGFACEHUB_API_TOKEN environment variable set up in your system\n")
+
+path = input("Please provide the directory containing datafiles that need embedding and vector database storage: \n")
+DATA_PATH = path
+
+faiss_path = input("Please provide where you'd like to generate a FAISS vector database: \n")
+DB_FAISS_PATH = faiss_path
+
+#DATA_PATH="../jupyter files/data/"
+#DB_FAISS_PATH = "vectorstore/db_faiss/"
+
 huggingfacehub_api_token=os.environ['HUGGINGFACEHUB_API_TOKEN']
 
 def create_vector_db():
@@ -21,22 +30,26 @@ def create_vector_db():
     for f in os.listdir(DATA_PATH):
         try:
             if f.endswith(".pdf"):
-                pdf_path = '../jupyter files/data/' + f
+                pdf_path = DATA_PATH + f
+                #pdf_path = '../jupyter files/data/' + f
                 loader = PyPDFLoader(pdf_path)
                 documents.extend(loader.load())
                 processed_pdfs+=1
             elif f.endswith(".html"):
-                html_path = '../jupyter files/data/' + f
+                html_path = DATA_PATH + f
+                #html_path = '../jupyter files/data/' + f
                 loader = BSHTMLLoader(html_path)
                 documents.extend(loader.load())
                 processed_htmls+=1
             elif f.endswith(".txt"):
-                txt_path = '../jupyter files/data/' + f
+                txt_path = DATA_PATH + f
+                #txt_path = '../jupyter files/data/' + f
                 loader = TextLoader(txt_path)
                 documents.extend(loader.load())
                 processed_txts+=1
             elif f.endswith(".json"):
-                json_path = '../jupyter files/data/' + f
+                json_path = DATA_PATH + f
+                #json_path = '../jupyter files/data/' + f
                 #with open('path_to_your_json_file.json', 'r') as file:
                 #    json_data = json.load(json_path)
                 loader = JSONLoader(json_path)
