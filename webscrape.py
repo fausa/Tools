@@ -30,7 +30,7 @@ json_filename = json_name + ".json"
 
 # Uses user input to print out information
 print("Webcrawling URL " + url)
-driver = webdriver.Firefox()
+driver = webdriver.Chrome()
 
 
 
@@ -95,9 +95,7 @@ while queue:
         driver.get(current_url)
         time.sleep(2)
         visited_urls.append(current_url)
-        #headers, text, tableheader, tabletext= driver.execute_script(javascript_code)
         data_method = driver.execute_script(javascript_code)
-        #one_stop_dict[current_url]=[[headers, text, tableheader, tabletext]]
         one_stop_dict[current_url]=data_method
         print(f"Scraping {current_url}")
         
