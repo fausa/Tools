@@ -29,11 +29,11 @@ These tools are meant to be a place to start, and might help with some basic nee
    * Enter precise parent URL address (make sure to use the secure https name if needed)
    * Enter output filename - data will be output as a JSON file
    * Run
-2. ingest_faiss.py
+2. ingest_data.py
     * Make sure you have a huggingface API token saved in your computer as an environment variable
     * Run from prompt window
     * Enter local path to datafiles (mixed)
-    * Enter local path for FAISS vector database indicies
+    * Enter local path for FAISS vector database indicies - future versions will add options for Chroma and others
     * Your datafiles are then loaded, embeded using HuggingFace (sentence-transformers/all-MiniLM-L6-v2) and stored in a FAISS vector database for use with your LLM
 ## How do the tools work?
 Please communicate any errors or shortcomings as these tools are by no means complete and final solutions - that way they can be fixed. 
