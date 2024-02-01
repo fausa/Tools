@@ -8,6 +8,7 @@ Develop open-source tools to help build upon and use for machine learning/AI pro
 ## Currently available 
 * Data Collection via Webcrawl/Scrape
 * Load/embed/store files needed to implement RAG
+* Generate variations of a given question (utterances) from a csv file using ChatGPT4
 
 ## Future Tools
 * Data Engineering
@@ -35,6 +36,12 @@ These tools are meant to be a place to start, and might help with some basic nee
     * Enter local path to datafiles (mixed)
     * Enter local path for FAISS vector database indicies - future versions will add options for Chroma and others
     * Your datafiles are then loaded, embeded using HuggingFace (sentence-transformers/all-MiniLM-L6-v2) and stored in a FAISS vector database for use with your LLM
+3. utterances_generation.py
+    * Make sure your original csv file contains a column named 'Question'
+    * Have a valid OpenAI key for using ChatGPT4 API saved into your environment variables
+    * Make sure you have enough funds/credits for API usage (1.48 to generate 20 utterances for 102 questions) 
+    * Make sure filepath given ends with the final backslash
+    * Run  
 ## How do the tools work?
 Please communicate any errors or shortcomings as these tools are by no means complete and final solutions - that way they can be fixed. 
 Thanks in advance ✨
