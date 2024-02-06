@@ -5,11 +5,36 @@ import os
 import regex
 import re
 
+##########################################################################
+##########################################################################
+
+# USAGE:
+# enter the filepath and filename as prompted, and then
+# enter the number of utterances per question you'd like to generate.
+
+# INPUT
+# Input file should be a csv file list of questions where it indicates
+# that at least one column is named "Question"
+# This script will remove all other columns
+
+# OUTPUT:
+# This will output a csv file with the Original question and a list
+# of the utterances for that question in the second column
+
+# FUTURE WORK:
+# Further formatting of this can be done, but for now, the second column 
+# will contain a numbered list of utterances.
+
+##########################################################################
+##########################################################################
+
 #api_key=
 os.environ['OPENAI_API_KEY'];
 
-filepath=input("Please enter the filepath that contains the csv file that needs utterances (please include the final slash):\n")
-file=input("Please enter the name of the csv filename that contains the questions that need utterances generation:\n")
+# User inputs:
+
+filepath=input("Please enter the path and filename of the csv that contains the questions that need utterances generation:\n")
+num_variations=input("Enter the number of utterances per question you would like to generate:\n")
 
 # functions to format the data correctly:
 
@@ -19,11 +44,10 @@ def remove_number_period(text):
 def remove_character(s):
     return s.replace('Â', '')
     
-# function to generate utterances from a dataframe entry:
 
 # function to generate utterances from a dataframe entry:
 
-def generate_alternate_sentences(dataframe, column_name, num_variations=20):
+def generate_alternate_sentences(dataframe, column_name, num_variations):
     """
     Generate alternate versions of sentences in a specified column of a DataFrame.
 
@@ -33,25 +57,19 @@ def generate_alternate_sentences(dataframe, column_name, num_variations=20):
     :param num_variations: Number of alternate versions to generate
     :return: DataFrame with original sentences and their alternate versions
     """
-    #openai.api_key = api_key
     results = []
 
     for sentence in dataframe[column_name]:
         try:
-            #prompt=f"Rewrite the following sentence in {num_variations} different ways: '{sentence}'"
-            prompt='Rewrite the following sentence in 20 different ways ' + sentence
+            prompt='Rewrite the following sentence in ' + num_variations + ' different ways ' + sentence
             response = openai.chat.completions.create(
                 model="gpt-4",
                 #"gpt-3.5-turbo",  # or another model of your choice
                 messages = [ # Change the prompt parameter to messages parameter
                     {'role': 'user', 'content': prompt}
                 ]
-                #prompt=f"Rewrite the following sentence in {num_variations} different ways: '{sentence}'",
-                #max_tokens=200,
-                #n=num_variations,
-                #stop=["\n"]
+
             )
-            #alternates = [response.choices[i].text.strip() for i in range(num_variations)]
             choices = response.choices
             chat_completion = choices[0]
             alternates = chat_completion.message.content
@@ -64,15 +82,19 @@ def generate_alternate_sentences(dataframe, column_name, num_variations=20):
     return pd.DataFrame(results)
 
 if __name__ == "__main__":
-    test_df = pd.read_csv(filepath + file)
+    test_df = pd.read_csv(filepath)
     test_df.dropna(subset=['Question'], inplace=True)
     test_df = test_df.loc[:, ['Question']]
     test_df['Question']=test_df['Question'].astype('string')
     test_df['Question'] = test_df['Question'].apply(remove_number_period)
-    new_df = generate_alternate_sentences(test_df, 'Question')
-
-    new_df.to_csv('utterances_'+ file, sep=',', index=False, encoding='utf-8')
+    new_df = generate_alternate_sentences(test_df, 'Question', num_variations)
     
-    print("Utterances for ", file, " have been generated in utterances_", file)
+    # extract filename from filepath variable:
+    file=os.path.basename(filepath)
+
+    # write to new csv file using original filename to identify:
+    new_df.to_csv('utterances_'+ num_variations + "_" + file, sep=',', index=False, encoding='utf-8')
+    
+    print("Utterances for ",file," have been generated in utterances_",num_variations,"_",file)
 
 
