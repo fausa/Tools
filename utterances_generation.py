@@ -82,7 +82,7 @@ def generate_alternate_sentences(dataframe, column_name, num_variations):
     return pd.DataFrame(results)
 
 if __name__ == "__main__":
-    test_df = pd.read_csv(filepath)
+    test_df = pd.read_csv(filepath, encoding = "ISO-8859-1")
     test_df.dropna(subset=['Question'], inplace=True)
     test_df = test_df.loc[:, ['Question']]
     test_df['Question']=test_df['Question'].astype('string')
