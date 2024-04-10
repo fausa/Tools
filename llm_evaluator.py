@@ -20,10 +20,13 @@ from langchain.evaluation import EvaluatorType
 # enter the filepath and filename as prompted
 
 # INPUT
-# Input file should be a csv file list of questions to be sent to the bot
+# Input file should be a csv file list of questions to be sent to the bot,
+# along with the generated output, and the ground truth or expected answer.
 
 # OUTPUT:
-# This will output a csv file with the Original question and the bot responses
+# This will output a csv file with the Original question, the bot responses,
+# the ground truth responses, along with the correctness, as calculated by 
+# langchain's evaluator, and cosine similarity scores
 
 ##########################################################################
 ##########################################################################
@@ -35,22 +38,6 @@ huggingfacehub_api_token=os.environ['HUGGINGFACEHUB_API_TOKEN']
 # User inputs:
 
 filepath=input("Please enter the path and filename of the csv that contains the questions, bot responses, and root truth answers that require analysis:\n")
-
-#config = AutoConfig(config=Config(temperature=0.5, 
-#                                  max_new_tokens=2048, context_length=2048, gpu_layers=1
-#                                 ),
-#                   )
-#llm = AutoModelForCausalLM.from_pretrained("TheBloke/Mistral-7B-Instruct-v0.1-GGUF",
-#                                                       model_file="mistral-7b-instruct-v0.1.Q4_K_M.gguf",
-#                                                       config=config,
-#                                                      )
-#llm = llms["mistral"]
-
-#INSTRUCTIONS = "You are a friendly chat bot willing to help out the user."
-
-
-
-##title_summary_var=input("Do you need:\n 1. Title generation \n 2. Summary generation \n 3. Both title and summary generation\n")
 
 
 def remove_number_period(text):
@@ -88,15 +75,8 @@ def evaluate2(ground_truth, generated):
 # function to generate utterances from a dataframe entry:
 
 def response_analysis(dataframe, column_name, column_name2, column_name3):
-    """
-    Generate alternate versions of sentences in a specified column of a DataFrame.
 
-    :param api_key: OpenAI API key
-    :param dataframe: DataFrame containing the sentences
-    :param column_name: Name of the column with sentences
-    :param num_variations: Number of alternate versions to generate
-    :return: DataFrame with original sentences and their alternate versions
-    """
+
     results = []
 
 
