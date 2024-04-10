@@ -9,6 +9,7 @@ Develop open-source tools to help build upon and use for machine learning/AI pro
 * Data Collection via Webcrawl/Scrape
 * Load/embed/store files needed to implement RAG
 * Generate variations of a given question (utterances) from a csv file using ChatGPT4
+* Evaluate an llm's chatbot responses using LangChain's correctness and cosine similarity scores
 
 ## Future Tools
 * Data Engineering
@@ -41,7 +42,11 @@ These tools are meant to be a place to start, and might help with some basic nee
     * Have a valid OpenAI key for using ChatGPT4 API saved into your environment variables
     * Make sure you have enough funds/credits for API usage (1.48 to generate 20 utterances for 102 questions) 
     * Make sure filepath given ends with the final backslash
-    * Run  
+    * Run
+4. llm_evaluator.py
+    * Make sure the input csv file contains columns named 'Question', 'Response', and 'Answer'
+    * Have a HuggingFace key
+    * Run   
 ## How do the tools work?
 Please communicate any errors or shortcomings as these tools are by no means complete and final solutions - that way they can be fixed. 
 Thanks in advance ✨
