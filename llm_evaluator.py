@@ -67,11 +67,6 @@ def evaluate2(ground_truth, generated):
     return cosine_similarity(ground_truth_embedding, generated_embedding)
 
 
-#def apply_template(instructions, contents):
-#    text_row = f"""<s>[INST]{instructions} {contents}[/INST]"""
-#    return text_row
-    
-
 # function to generate utterances from a dataframe entry:
 
 def response_analysis(dataframe, column_name, column_name2, column_name3):
@@ -96,7 +91,6 @@ def response_analysis(dataframe, column_name, column_name2, column_name3):
             ground_truth = sentence2
             generated_response = sentence
 
-            #score = evaluator2.evaluate2(ground_truth, generated_response)
             score = evaluate2(ground_truth, generated_response)
     
             results.append({'Response': sentence, 'Answer': sentence2, 'Correctness Score': eval_result['score'],
@@ -121,7 +115,6 @@ if __name__ == "__main__":
     test_df['Question']=test_df['Question'].astype('string')
     
     remove_character(test_df['Response'])
-    #test_df['Question'] = test_df['Question'].apply(remove_number_period)
     analysis_df = response_analysis(test_df, 'Response', 'Answer', 'Question')
 
         
