@@ -30,6 +30,7 @@ links=os.environ['webchat_div_links']
 
 confused_response=os.environ['webchat_confused']
 feedback_response=os.environ['webchat_feedbackrq']
+initial_response=os.environ['webchat_initialresponse']
 
 # Take user input as to the CSV file that will be used
 # to feed questions to the Copilot bot:
@@ -69,7 +70,7 @@ def interact_with_chatbot(dataframe):
 
     # We know the chatbot requires an input whether user is Undergraduate,
     # Graduate or Alumni, here we select to use the chatbot as an Undergraduate:
-    question1="Undergraduate"
+    question1=initial_response
     input_field = driver.find_element(By.CSS_SELECTOR, input_textbox)
     input_field.send_keys(question1)
     input_field.send_keys("\n")
